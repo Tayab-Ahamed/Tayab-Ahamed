@@ -51,10 +51,12 @@ Every card is a real repository. Open the notebook under it for the objective, t
 
 > Can a system diagnose a fault and act on it without a human in the loop?
 
-<a href="https://github.com/Tayab-Ahamed/FaultSeeker-"><picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-FaultSeeker--dark.svg">
   <img alt="EXP-01 FaultSeeker. Blockchain transaction forensics. Division: Autonomous Agents. Language: Python. Pipeline: Trace then Replay then Detect then Calibrate then Verdict." src="assets/cards/card-FaultSeeker-.svg" width="100%">
-</picture></a>
+</picture>
+
+[**FaultSeeker &rarr;**](https://github.com/Tayab-Ahamed/FaultSeeker-)
 
 <details>
 <summary><b>Open the notebook</b> &mdash; EXP-01 FaultSeeker</summary>
@@ -88,10 +90,12 @@ flowchart LR
 
 </details>
 
-<a href="https://github.com/Tayab-Ahamed/RepoMedic-Agent"><picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-RepoMedic-Agent-dark.svg">
   <img alt="EXP-05 RepoMedic-Agent. Repository health agent. Division: Autonomous Agents. Language: JavaScript. Pipeline: Clone then Six skills then Score then Rank then Report." src="assets/cards/card-RepoMedic-Agent.svg" width="100%">
-</picture></a>
+</picture>
+
+[**RepoMedic-Agent &rarr;**](https://github.com/Tayab-Ahamed/RepoMedic-Agent)
 
 <details>
 <summary><b>Open the notebook</b> &mdash; EXP-05 RepoMedic-Agent</summary>
@@ -126,10 +130,12 @@ flowchart LR
 
 </details>
 
-<a href="https://github.com/Tayab-Ahamed/neuroops"><picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-neuroops-dark.svg">
   <img alt="EXP-10 neuroops. Autonomous SRE for Kubernetes. Division: Autonomous Agents. Language: Python. Pipeline: Detect then Diagnose then Plan then Remediate then Verify." src="assets/cards/card-neuroops.svg" width="100%">
-</picture></a>
+</picture>
+
+[**neuroops &rarr;**](https://github.com/Tayab-Ahamed/neuroops)
 
 <details>
 <summary><b>Open the notebook</b> &mdash; EXP-10 neuroops</summary>
@@ -172,10 +178,12 @@ flowchart LR
 
 > Can a model answer only from evidence it is able to cite?
 
-<a href="https://github.com/Tayab-Ahamed/StudyMind"><picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-StudyMind-dark.svg">
   <img alt="EXP-02 StudyMind. Study assistant over your own PDFs. Division: Grounded Retrieval. Language: JavaScript. Pipeline: PDF then Index then Retrieve then Summarise then Chat." src="assets/cards/card-StudyMind.svg" width="100%">
-</picture></a>
+</picture>
+
+[**StudyMind &rarr;**](https://github.com/Tayab-Ahamed/StudyMind)
 
 <details>
 <summary><b>Open the notebook</b> &mdash; EXP-02 StudyMind</summary>
@@ -209,10 +217,12 @@ flowchart LR
 
 </details>
 
-<a href="https://github.com/Tayab-Ahamed/AI-Sakhi"><picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-AI-Sakhi-dark.svg">
   <img alt="EXP-09 AI-Sakhi. Adaptive tutoring system. Division: Grounded Retrieval. Language: TypeScript. Pipeline: Diagnose then Teach then Practise then Measure then Adapt." src="assets/cards/card-AI-Sakhi.svg" width="100%">
-</picture></a>
+</picture>
+
+[**AI-Sakhi &rarr;**](https://github.com/Tayab-Ahamed/AI-Sakhi)
 
 <details>
 <summary><b>Open the notebook</b> &mdash; EXP-09 AI-Sakhi</summary>
@@ -246,10 +256,12 @@ flowchart LR
 
 </details>
 
-<a href="https://github.com/Tayab-Ahamed/vetaid-rag-assistant"><picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-vetaid-rag-assistant-dark.svg">
   <img alt="EXP-11 VetAid. Veterinary first-aid assistant. Division: Grounded Retrieval. Language: Python. Pipeline: Symptom then Filter then Retrieve then Cite then Guide." src="assets/cards/card-vetaid-rag-assistant.svg" width="100%">
-</picture></a>
+</picture>
+
+[**VetAid &rarr;**](https://github.com/Tayab-Ahamed/vetaid-rag-assistant)
 
 <details>
 <summary><b>Open the notebook</b> &mdash; EXP-11 VetAid</summary>
@@ -293,10 +305,12 @@ flowchart LR
 
 > Can a single camera frame become a decision?
 
-<a href="https://github.com/Tayab-Ahamed/Pothole-Detection"><picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-Pothole-Detection-dark.svg">
   <img alt="EXP-03 Pothole-Detection. Real-time road defect detection. Division: Perception and Vision. Language: Python. Pipeline: Frame then YOLOv8 then Detect then Log then CSV." src="assets/cards/card-Pothole-Detection.svg" width="100%">
-</picture></a>
+</picture>
+
+[**Pothole-Detection &rarr;**](https://github.com/Tayab-Ahamed/Pothole-Detection)
 
 <details>
 <summary><b>Open the notebook</b> &mdash; EXP-03 Pothole-Detection</summary>
@@ -330,10 +344,12 @@ flowchart LR
 
 </details>
 
-<a href="https://github.com/Tayab-Ahamed/ecosentinel"><picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-ecosentinel-dark.svg">
   <img alt="EXP-07 ecosentinel. Environmental monitoring station. Division: Perception and Vision. Language: TypeScript. Pipeline: Feeds then Ingest then Prophet then Map then Forecast." src="assets/cards/card-ecosentinel.svg" width="100%">
-</picture></a>
+</picture>
+
+[**ecosentinel &rarr;**](https://github.com/Tayab-Ahamed/ecosentinel)
 
 <details>
 <summary><b>Open the notebook</b> &mdash; EXP-07 ecosentinel</summary>
@@ -368,10 +384,12 @@ flowchart LR
 
 </details>
 
-<a href="https://github.com/Tayab-Ahamed/ReloopAI"><picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-ReloopAI-dark.svg">
   <img alt="EXP-12 ReloopAI. Circular resource exchange. Division: Perception and Vision. Language: TypeScript. Pipeline: Photo then Vision + OCR then Match then Dispatch then Receipt." src="assets/cards/card-ReloopAI.svg" width="100%">
-</picture></a>
+</picture>
+
+[**ReloopAI &rarr;**](https://github.com/Tayab-Ahamed/ReloopAI)
 
 <details>
 <summary><b>Open the notebook</b> &mdash; EXP-12 ReloopAI</summary>
@@ -415,10 +433,12 @@ flowchart LR
 
 > Can we test the consequence before it reaches the world?
 
-<a href="https://github.com/Tayab-Ahamed/Deploy-Platform"><picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-Deploy-Platform-dark.svg">
   <img alt="EXP-04 Deploy-Platform. Self-hosted deployment platform. Division: Systems and Simulation. Language: Go. Pipeline: Push then Build then Registry then k3s then URL." src="assets/cards/card-Deploy-Platform.svg" width="100%">
-</picture></a>
+</picture>
+
+[**Deploy-Platform &rarr;**](https://github.com/Tayab-Ahamed/Deploy-Platform)
 
 <details>
 <summary><b>Open the notebook</b> &mdash; EXP-04 Deploy-Platform</summary>
@@ -453,10 +473,12 @@ flowchart LR
 
 </details>
 
-<a href="https://github.com/Tayab-Ahamed/LifeSim-AI"><picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-LifeSim-AI-dark.svg">
   <img alt="EXP-06 LifeSim-AI. Financial decision simulator. Division: Systems and Simulation. Language: TypeScript. Pipeline: Choice then Rules then Clamp then Compound then Outcome." src="assets/cards/card-LifeSim-AI.svg" width="100%">
-</picture></a>
+</picture>
+
+[**LifeSim-AI &rarr;**](https://github.com/Tayab-Ahamed/LifeSim-AI)
 
 <details>
 <summary><b>Open the notebook</b> &mdash; EXP-06 LifeSim-AI</summary>
@@ -490,10 +512,12 @@ flowchart LR
 
 </details>
 
-<a href="https://github.com/Tayab-Ahamed/SETRS-Trajectory-Preemption"><picture>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-SETRS-Trajectory-Preemption-dark.svg">
   <img alt="EXP-08 SETRS. Emergency corridor orchestration. Division: Systems and Simulation. Language: Python. Pipeline: Trajectory then Predict then Preempt then SUMO then Corridor." src="assets/cards/card-SETRS-Trajectory-Preemption.svg" width="100%">
-</picture></a>
+</picture>
+
+[**SETRS &rarr;**](https://github.com/Tayab-Ahamed/SETRS-Trajectory-Preemption)
 
 <details>
 <summary><b>Open the notebook</b> &mdash; EXP-08 SETRS</summary>
