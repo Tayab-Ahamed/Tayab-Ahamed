@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
-  <img alt="Tayab Ahamed, AI Research and Engineering Lab. A plot of twelve repositories: the horizontal axis is the month each was created from March to August 2026, the four rows are the research divisions, and the lines between points mark technology or design decisions that two repositories share." src="assets/hero.svg" width="100%">
+  <img alt="Tayab Ahamed, AI Research and Engineering Lab. A plot of seventeen repositories: the horizontal axis is the month each was created from March to August 2026, the five rows are the research divisions, and the lines between points mark technology or design decisions that two repositories share." src="assets/hero.svg" width="100%">
 </picture>
 
 </div>
@@ -11,7 +11,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/registry-dark.svg">
-  <img alt="Experiment registry. Twelve numbered experiments, 001 to 012, each listed with its division, state, primary language and month opened. State is derived from evidence: deployed means a public URL exists, open means an OSI licence is declared, prototype means neither." src="assets/registry.svg" width="100%">
+  <img alt="Experiment registry. Seventeen numbered experiments, 001 to 017, each listed with its division, state, primary language and month opened. State is derived from evidence: deployed means a public URL exists, open means an OSI licence is declared, prototype means neither." src="assets/registry.svg" width="100%">
 </picture>
 
 </div>
@@ -20,7 +20,9 @@
 
 ### Building AI systems that assume the model can be wrong.
 
-Twelve experiments. Every one of them is the same question in a different domain.
+Seventeen experiments. Every one of them is the same question in a different domain.
+
+[**Portfolio &mdash; a live retrieval assistant you can interrogate &rarr;**](https://project-tayab.onrender.com/)
 
 </div>
 
@@ -31,11 +33,11 @@ Twelve experiments. Every one of them is the same question in a different domain
 
 ## The lab
 
-Four divisions. Grouped by the question the work asks, not the language it happens to be written in.
+Five divisions. Grouped by the question the work asks, not the language it happens to be written in.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/lab-map-dark.svg">
-  <img alt="Lab map. Four research divisions with three experiments each. Division 01 autonomous agents: FaultSeeker, RepoMedic-Agent, neuroops. Division 02 grounded retrieval: StudyMind, AI-Sakhi, vetaid-rag-assistant. Division 03 perception and vision: Pothole-Detection, ecosentinel, ReloopAI. Division 04 systems and simulation: Deploy-Platform, LifeSim-AI, SETRS-Trajectory-Preemption." src="assets/lab-map.svg" width="100%">
+  <img alt="Lab map. Five research divisions holding seventeen experiments. Division 01 autonomous agents: FaultSeeker, RepoMedic-Agent, neuroops, Airgap NOC Copilot, RecoverOS. Division 02 grounded retrieval: StudyMind, AI-Sakhi, VetAid. Division 03 perception and vision: Pothole-Detection, ecosentinel, ReloopAI. Division 04 systems and simulation: Deploy-Platform, LifeSim-AI, SETRS-Trajectory-Preemption. Division 05 security and assurance: Sentinel-FL, Actionguard Autoaudit, Actionguard CI." src="assets/lab-map.svg" width="100%">
 </picture>
 
 <picture>
@@ -86,7 +88,7 @@ flowchart LR
 | **Repository** | [FaultSeeker-](https://github.com/Tayab-Ahamed/FaultSeeker-) |
 | **Status** | Open source, no public deployment |
 
-> Carries a LaTeX survey paper alongside the code. The only repo of the twelve with an outside fork.
+> Carries a LaTeX survey paper alongside the code. The only repo of the seventeen with an outside fork.
 
 </details>
 
@@ -166,6 +168,85 @@ flowchart LR
 | **Status** | Open source, no public deployment |
 
 > Self-observability is the point -- the agent is measured the way it measures the cluster.
+
+</details>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-Airgap-noc-Copilot-dark.svg">
+  <img alt="EXP-16 Airgap NOC Copilot. Offline NOC copilot for MPLS and SD-WAN. Division: Autonomous Agents. Language: Python. Pipeline: Telemetry then Risk score then Retrieve then Diagnose then Runbook." src="assets/cards/card-Airgap-noc-Copilot.svg" width="100%">
+</picture>
+
+[**Airgap NOC Copilot &rarr;**](https://github.com/Tayab-Ahamed/Airgap-noc-Copilot)
+
+<details>
+<summary><b>Open the notebook</b> &mdash; EXP-16 Airgap NOC Copilot</summary>
+
+**Objective.** Predict MPLS and SD-WAN fault precursors before they become an outage, and hand the operator a runbook, on a network with no internet connection.
+
+**The problem.** Every network copilot assumes a cloud API. Carrier, defence and industrial networks are air-gapped, so a tool that phones home cannot be installed at all &mdash; and a tool that guesses at three in the morning is worse than no tool.
+
+**Architecture.** Telemetry from a Containerlab and FRRouting testbed feeds a machine learning risk scorer that ranks fault precursors. The highest-risk incident is enriched by local FAISS retrieval over the runbook corpus, and a locally hosted LLM writes the root cause analysis. Nothing leaves the box.
+
+```mermaid
+flowchart LR
+    S0("Telemetry")
+    S1("Risk score")
+    S2("Retrieve")
+    S3("Diagnose")
+    S4("Runbook")
+    S0 --> S1 --> S2 --> S3 --> S4
+```
+
+| | |
+|---|---|
+| **Stack** | Python &middot; Machine learning risk scoring &middot; FAISS &middot; Local LLM &middot; RAG &middot; Containerlab &middot; FRRouting |
+| **Language** | Python |
+| **Licence** | None declared |
+| **Created** | 13 August 2026 |
+| **Topics** | ai-copilot &middot; air-gapped &middot; predictive-maintenance &middot; rag &middot; sd-wan &middot; network-operations |
+| **Repository** | [Airgap-noc-Copilot](https://github.com/Tayab-Ahamed/Airgap-noc-Copilot) |
+| **Status** | Prototype, no public deployment |
+
+> The constraint is the design: if it cannot run offline, it cannot run here.
+
+</details>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-RecoverOS-dark.svg">
+  <img alt="EXP-17 RecoverOS. Policy-governed revenue recovery. Division: Autonomous Agents. Language: Python. Pipeline: Detect then Decide then Bound then Execute then Prove." src="assets/cards/card-RecoverOS.svg" width="100%">
+</picture>
+
+[**RecoverOS &rarr;**](https://github.com/Tayab-Ahamed/RecoverOS)
+
+<details>
+<summary><b>Open the notebook</b> &mdash; EXP-17 RecoverOS</summary>
+
+**Objective.** Recover revenue lost to failed payments, checkout drop-offs, lapsed subscriptions and overdue receivables, without letting an agent act on money unsupervised.
+
+**The problem.** Dunning is usually a cron job with three email templates, and the agentic version of it is worse: an autonomous system near a payment rail needs a bound it cannot cross and a record a finance team can audit.
+
+**Architecture.** A detector raises the recovery event. An adaptive agent decides the next action. A policy layer bounds what that action is allowed to be, execution is checked against verified payment proof, and every decision, attempt and outcome is written to a complete audit trail.
+
+```mermaid
+flowchart LR
+    S0("Detect")
+    S1("Decide")
+    S2("Bound")
+    S3("Execute")
+    S4("Prove")
+    S0 --> S1 --> S2 --> S3 --> S4
+```
+
+| | |
+|---|---|
+| **Stack** | Python &middot; Agent decision loop &middot; Policy engine &middot; Bounded execution &middot; Payment verification &middot; Audit trail |
+| **Language** | Python |
+| **Licence** | MIT |
+| **Created** | 22 August 2026 |
+| **Repository** | [RecoverOS](https://github.com/Tayab-Ahamed/RecoverOS) |
+| **Status** | Open source, no public deployment |
+
+> An agent allowed near money is only as good as the bound it cannot cross.
 
 </details>
 
@@ -386,13 +467,13 @@ flowchart LR
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-ReloopAI-dark.svg">
-  <img alt="EXP-12 ReloopAI. Circular resource exchange. Division: Perception and Vision. Language: TypeScript. Pipeline: Photo then Vision + OCR then Match then Dispatch then Receipt." src="assets/cards/card-ReloopAI.svg" width="100%">
+  <img alt="EXP-15 ReloopAI. Circular resource exchange. Division: Perception and Vision. Language: TypeScript. Pipeline: Photo then Vision + OCR then Match then Dispatch then Receipt." src="assets/cards/card-ReloopAI.svg" width="100%">
 </picture>
 
 [**ReloopAI &rarr;**](https://github.com/Tayab-Ahamed/ReloopAI)
 
 <details>
-<summary><b>Open the notebook</b> &mdash; EXP-12 ReloopAI</summary>
+<summary><b>Open the notebook</b> &mdash; EXP-15 ReloopAI</summary>
 
 **Objective.** Turn one photo of surplus into a matched, routed, tracked and impact-reported pickup.
 
@@ -420,7 +501,7 @@ flowchart LR
 | **Status** | **Live** &mdash; deployed and reachable |
 | **Live** | [reloop-ai-liart.vercel.app](https://reloop-ai-liart.vercel.app) |
 
-> The only experiment with a public deployment, and the most committed-to of the twelve.
+> The only experiment with a public deployment, and the most committed-to of the seventeen.
 
 </details>
 
@@ -557,18 +638,147 @@ flowchart LR
   <img alt="" src="assets/divider.svg" width="100%">
 </picture>
 
+### Division 05 &nbsp;&middot;&nbsp; Security and Assurance
+
+> Can a pipeline prove it was not tampered with?
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-Sentinel-FL-dark.svg">
+  <img alt="EXP-12 Sentinel-FL. Backdoor immune system for federated learning. Division: Security and Assurance. Language: Python. Pipeline: Aggregate then Detect then Explain then Repair then Attest." src="assets/cards/card-Sentinel-FL.svg" width="100%">
+</picture>
+
+[**Sentinel-FL &rarr;**](https://github.com/Tayab-Ahamed/Sentinel-FL)
+
+<details>
+<summary><b>Open the notebook</b> &mdash; EXP-12 Sentinel-FL</summary>
+
+**Objective.** Detect a backdoor in a federated model, explain it, repair it, and cryptographically attest that the repair happened.
+
+**The problem.** Federated learning hides the training data by design, which means it also hides the poison. Detection on its own is not a defence: the party consuming the model has no way to check that anything was actually fixed.
+
+**Architecture.** Client updates arriving at the Flower aggregator are screened for the statistical signature of a backdoor. Flagged updates are explained down to the trigger, the poisoned contribution is repaired out of the global model, and the result is signed so a downstream consumer can verify the mitigation independently.
+
+```mermaid
+flowchart LR
+    S0("Aggregate")
+    S1("Detect")
+    S2("Explain")
+    S3("Repair")
+    S4("Attest")
+    S0 --> S1 --> S2 --> S3 --> S4
+```
+
+| | |
+|---|---|
+| **Stack** | Python &middot; Flower &middot; Federated learning &middot; Backdoor defence &middot; Adversarial machine learning &middot; Cryptographic attestation |
+| **Language** | Python |
+| **Licence** | MIT |
+| **Created** | 8 July 2026 |
+| **Topics** | ai-security &middot; adversarial-machine-learning &middot; backdoor-defense &middot; federated-learning &middot; flower-framework |
+| **Repository** | [Sentinel-FL](https://github.com/Tayab-Ahamed/Sentinel-FL) |
+| **Status** | Open source, no public deployment |
+
+> A defence that cannot be verified is a claim, not a defence.
+
+</details>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-Actionguard-Autoaudit-dark.svg">
+  <img alt="EXP-13 Actionguard Autoaudit. Auditing and remediation for CI pipelines. Division: Security and Assurance. Language: Python. Pipeline: Scan then Audit then Triage then Patch then Pull request." src="assets/cards/card-Actionguard-Autoaudit.svg" width="100%">
+</picture>
+
+[**Actionguard Autoaudit &rarr;**](https://github.com/Tayab-Ahamed/Actionguard-Autoaudit)
+
+<details>
+<summary><b>Open the notebook</b> &mdash; EXP-13 Actionguard Autoaudit</summary>
+
+**Objective.** Audit GitHub CI/CD and agentic AI workflows for security flaws, then open the pull request that fixes them.
+
+**The problem.** CI is the softest target in most repositories: unpinned actions, over-scoped tokens, injectable inputs. Scanners find all of it and nobody acts, because a finding that arrives as a report is not a control.
+
+**Architecture.** Workflow definitions are scanned, audited against zizmor and SAST rules, and triaged by severity and exploitability. The remediation engine then generates the patch and raises it as a pull request, so the fix lands in review rather than in a backlog.
+
+```mermaid
+flowchart LR
+    S0("Scan")
+    S1("Audit")
+    S2("Triage")
+    S3("Patch")
+    S4("Pull request")
+    S0 --> S1 --> S2 --> S3 --> S4
+```
+
+| | |
+|---|---|
+| **Stack** | Python &middot; GitHub Actions &middot; zizmor &middot; SAST &middot; Agentic remediation |
+| **Language** | Python |
+| **Licence** | MIT |
+| **Created** | 8 July 2026 |
+| **Topics** | agentic-ai &middot; ci-cd-security &middot; devsecops &middot; github-actions &middot; sast &middot; security-auditing |
+| **Repository** | [Actionguard-Autoaudit](https://github.com/Tayab-Ahamed/Actionguard-Autoaudit) |
+| **Status** | Open source, no public deployment |
+
+> A finding that does not arrive as a diff does not get fixed.
+
+</details>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-Actionguard-CI-dark.svg">
+  <img alt="EXP-14 Actionguard CI. Workflow security auditor with reports. Division: Security and Assurance. Language: Python. Pipeline: Ingest then Analyse then Score then Report then Gate." src="assets/cards/card-Actionguard-CI.svg" width="100%">
+</picture>
+
+[**Actionguard CI &rarr;**](https://github.com/Tayab-Ahamed/Actionguard-CI)
+
+<details>
+<summary><b>Open the notebook</b> &mdash; EXP-14 Actionguard CI</summary>
+
+**Objective.** Score the security of a repository's CI/CD and agentic AI workflows, report it in a form somebody will actually read, and gate the build on the result.
+
+**The problem.** Security output rots inside build artefacts. If the report is not readable and is not allowed to fail the pipeline, the pipeline stays insecure and everyone stays comfortable.
+
+**Architecture.** Workflow definitions are ingested and analysed against action pinning, permission scope and injection rules, the findings are scored, and the run emits interactive HTML and machine-readable JSON. The gate then fails the build when the score falls below the configured threshold.
+
+```mermaid
+flowchart LR
+    S0("Ingest")
+    S1("Analyse")
+    S2("Score")
+    S3("Report")
+    S4("Gate")
+    S0 --> S1 --> S2 --> S3 --> S4
+```
+
+| | |
+|---|---|
+| **Stack** | Python &middot; GitHub Actions &middot; zizmor &middot; HTML and JSON reporting &middot; CI gating |
+| **Language** | Python |
+| **Licence** | MIT |
+| **Created** | 8 July 2026 |
+| **Topics** | agentic-ai &middot; ci-cd-security &middot; devsecops &middot; github-actions &middot; security-auditor &middot; zizmor |
+| **Repository** | [Actionguard-CI](https://github.com/Tayab-Ahamed/Actionguard-CI) |
+| **Status** | Open source, no public deployment |
+
+> The report is only a control when it is allowed to say no.
+
+</details>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/divider-dark.svg">
+  <img alt="" src="assets/divider.svg" width="100%">
+</picture>
+
 ## How the systems connect
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/atlas-dark.svg">
-  <img alt="Technology atlas. A knowledge graph of the whole laboratory: twelve repositories on an outer ring grouped into four divisions, and every technology used by two or more of them floating in the centre, joined to each repository that uses it." src="assets/atlas.svg" width="100%">
+  <img alt="Technology atlas. A knowledge graph of the whole laboratory: seventeen repositories sit on a ring grouped into five divisions, and every pair that shares two or more technologies is joined by a chord. The most shared technologies are Python, React and multi-provider LLM routing." src="assets/atlas.svg" width="100%">
 </picture>
 
 These repositories were not planned as an ecosystem. The connections are there anyway, because the same conclusions kept getting reached. Read across a row to see who shares a decision; read down a column to see what a system is made of.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/substrate-dark.svg">
-  <img alt="Repository relationship matrix. Ten shared layers plotted against the twelve repositories, with a filled cell where a repository uses that layer. The layers are model routing, deterministic fallback, grounding and citation, weighted scoring, vector retrieval, vision inference, FastAPI services, React front ends, container and cluster, and simulate before shipping." src="assets/substrate.svg" width="100%">
+  <img alt="Repository relationship matrix. Eleven shared layers plotted against the seventeen repositories, with a filled cell where a repository uses that layer. The layers are model routing, deterministic fallback, grounding and citation, weighted scoring, vector retrieval, vision inference, audit trail and attestation, FastAPI services, React front ends, container and cluster, and simulate before shipping." src="assets/substrate.svg" width="100%">
 </picture>
 
 <details>
@@ -582,12 +792,14 @@ flowchart TB
         CITE("Grounding and citation")
         SCORE("Weighted scoring")
         SIM("Simulate before shipping")
+        ATTEST("Audit trail and attestation")
     end
     ROUTE --> FaultSeeker & ReloopAI & LifeSim
     FALL --> ReloopAI & LifeSim & AISakhi & FaultSeeker
-    CITE --> AISakhi & VetAid & StudyMind
-    SCORE --> ReloopAI & AISakhi & RepoMedic
+    CITE --> AISakhi & VetAid & StudyMind & Airgap
+    SCORE --> ReloopAI & AISakhi & RepoMedic & Airgap & ActionguardCI
     SIM --> SETRS & neuroops & LifeSim
+    ATTEST --> SentinelFL & ActionguardCI & Autoaudit & RecoverOS
     FaultSeeker("FaultSeeker")
     ReloopAI("ReloopAI")
     LifeSim("LifeSim-AI")
@@ -597,11 +809,16 @@ flowchart TB
     RepoMedic("RepoMedic-Agent")
     SETRS("SETRS-Trajectory-Preemption")
     neuroops("neuroops")
+    SentinelFL("Sentinel-FL")
+    ActionguardCI("Actionguard CI")
+    Autoaudit("Actionguard Autoaudit")
+    Airgap("Airgap NOC Copilot")
+    RecoverOS("RecoverOS")
 ```
 
 </details>
 
-### Three conclusions I keep reaching
+### Four conclusions I keep reaching
 
 **01 &nbsp; Never depend on one model**
 
@@ -620,6 +837,12 @@ AI-Sakhi attributes to the page and refuses below a distance threshold. VetAid p
 SETRS proves an ambulance corridor in SUMO before touching an intersection. neuroops benchmarks its own agent against injected chaos. LifeSim keeps a deterministic engine authoritative over the narration.
 
 <sub>[SETRS](https://github.com/Tayab-Ahamed/SETRS-Trajectory-Preemption) &middot; [neuroops](https://github.com/Tayab-Ahamed/neuroops) &middot; [LifeSim-AI](https://github.com/Tayab-Ahamed/LifeSim-AI)</sub>
+
+**04 &nbsp; Prove it, or it did not happen**
+
+The newest division exists because the other three kept running into the same wall. Sentinel-FL signs the repair so the fix can be verified by whoever consumes the model. Actionguard CI is allowed to fail the build. Actionguard Autoaudit delivers its findings as a pull request rather than a report. RecoverOS will not touch money outside a policy bound, and writes what it did to an audit trail.
+
+<sub>[Sentinel-FL](https://github.com/Tayab-Ahamed/Sentinel-FL) &middot; [Actionguard CI](https://github.com/Tayab-Ahamed/Actionguard-CI) &middot; [Actionguard Autoaudit](https://github.com/Tayab-Ahamed/Actionguard-Autoaudit) &middot; [RecoverOS](https://github.com/Tayab-Ahamed/RecoverOS)</sub>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/divider-dark.svg">
@@ -642,7 +865,7 @@ SETRS proves an ambulance corridor in SUMO before touching an intersection. neur
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/timeline-dark.svg">
-  <img alt="Research log from March to August 2026 in four phases: tools first in March, applied systems in April, rigour in May, and grounded and shipped in July. Twelve repositories are plotted on a spine in creation order." src="assets/timeline.svg" width="100%">
+  <img alt="Research log from March to August 2026 in five phases: tools first in March, applied systems in April, rigour in May, grounded and hardened in July, and bounded autonomy in August. Seventeen repositories are plotted on a spine in creation order." src="assets/timeline.svg" width="100%">
 </picture>
 
 <picture>
@@ -654,8 +877,23 @@ SETRS proves an ambulance corridor in SUMO before touching an intersection. neur
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg">
-  <img alt="Instrument inventory. Technologies grouped by role: languages, models, retrieval, services, interface, data and runtime. Language entries show how many of the twelve repositories use that language as their primary language." src="assets/stack.svg" width="100%">
+  <img alt="Instrument inventory. Technologies grouped by role: languages, models, retrieval, services, interface, perception, assurance, and data and runtime. Language entries show how many of the seventeen repositories use that language as their primary language." src="assets/stack.svg" width="100%">
 </picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/divider-dark.svg">
+  <img alt="" src="assets/divider.svg" width="100%">
+</picture>
+
+## The portfolio is one of the experiments
+
+[**project-tayab.onrender.com**](https://project-tayab.onrender.com/) is not a page about the work. It is the argument itself, running.
+
+Ask it a question and the retrieval happens in front of you: dense vectors and BM25 in parallel, reciprocal rank fusion to merge the two candidate lists, then a cross-encoder reranker on top. You can toggle any stage off and watch the ranking get worse, which is the only honest way to show that a stage earns its place. Answers stay sourced, the knowledge base is scored continuously, and there is a deterministic fallback underneath so a bad retrieval degrades instead of inventing.
+
+Every conclusion on this page is implemented in it &mdash; grounding and citation from Division 02, weighted scoring from Division 03, the evaluation gate and refusal behaviour from Division 05. It is also the fastest way to understand how I build: type `help` into the shell on the page.
+
+<sub>Hybrid dense and lexical retrieval &middot; Reciprocal rank fusion &middot; Cross-encoder reranking &middot; Continuous evaluation scoring &middot; Deterministic fallback &middot; In-browser retrieval trace</sub>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/divider-dark.svg">
@@ -664,7 +902,7 @@ SETRS proves an ambulance corridor in SUMO before touching an intersection. neur
 
 ## Where this goes
 
-The next step is the one the log is already pointing at. The twelve experiments taught me how to make a single system behave; what they have not yet taught me is how to prove it. `AI-Sakhi` has release gates, `neuroops` benchmarks itself against injected chaos, `FaultSeeker` reports a calibrated confidence, `RepoMedic` audits its own repository in CI. Four separate attempts at the same missing discipline: **evaluation**.
+The next step is the one the log is already pointing at. The first eleven experiments taught me how to make a single system behave; what they have not yet taught me is how to prove it. `AI-Sakhi` has release gates, `neuroops` benchmarks itself against injected chaos, `FaultSeeker` reports a calibrated confidence, `RepoMedic` audits its own repository in CI. Four separate attempts at the same missing discipline: **evaluation**. Division 05 is what happened when I stopped treating it as a side effect: three repositories whose entire job is proving that a pipeline, a model or an agent did what it claimed.
 
 So that is where I am going. AI engineering where the evaluation harness is built before the feature, where refusal is a designed behaviour rather than an edge case, and where a system that cannot show its evidence is not considered finished.
 
@@ -672,7 +910,7 @@ I am looking for AI or ML engineering work where that is the standard.
 
 <div align="center">
 
-[**All repositories**](https://github.com/Tayab-Ahamed?tab=repositories) &nbsp;&middot;&nbsp; [**ReLoop AI, live**](https://reloop-ai-liart.vercel.app)
+[**Portfolio, live**](https://project-tayab.onrender.com/) &nbsp;&middot;&nbsp; [**All repositories**](https://github.com/Tayab-Ahamed?tab=repositories) &nbsp;&middot;&nbsp; [**ReLoop AI, live**](https://reloop-ai-liart.vercel.app)
 
 &nbsp;&middot;&nbsp; [**LinkedIn**](https://www.linkedin.com/in/tayab-ahamed-822575308/)
 
@@ -688,20 +926,20 @@ I am looking for AI or ML engineering work where that is the standard.
 <details>
 <summary><b>How this page is built</b></summary>
 
-Every image on this page is an SVG generated by a Python script in [`scripts/`](scripts). Nothing is hand-drawn, nothing is stock, nothing was downloaded. The facts all live in one file, [`scripts/repos.py`](scripts/repos.py), which is also where this README's prose comes from &mdash; so the words and the pictures cannot disagree.
+Every image on this page is an SVG generated by a Python script in [`scripts/`](scripts). Nothing is hand-drawn, nothing is stock, nothing was downloaded. The facts all live in one file, [`scripts/repos.py`](scripts/repos.py), which is where every count, date, division and pipeline on this page comes from &mdash; so the words and the pictures cannot disagree.
 
 ```
-python3 scripts/build_all.py      # regenerates every asset and this README
+python3 scripts/build_assets.py   # regenerates every asset on this page
 ```
 
 | | |
 |---|---|
-| **Assets** | 38 SVG files, light and dark pairs, roughly 3&ndash;20&nbsp;KB each |
+| **Assets** | 48 SVG files, light and dark pairs, roughly 3&ndash;20&nbsp;KB each |
 | **Dependencies** | none &mdash; the standard library draws the SVG by hand |
 | **Dark mode** | `<picture>` with `prefers-color-scheme`, honoured natively by GitHub |
 | **Accessibility** | every SVG carries `<title>` and `<desc>`; every `<img>` carries alt text; all body copy is real Markdown |
 | **JavaScript** | none |
 
-A word on honesty. This page shows no star counts, no follower counts and no streak graphics, because those numbers are currently zero and dressing them up would undermine everything else here. The counts that do appear &mdash; twelve repositories, four divisions, five months, one live deployment &mdash; are all verifiable from the repository list. One repository, [`foundry`](https://github.com/Tayab-Ahamed/foundry), is a fork of the Ethereum toolchain and is deliberately excluded from the twelve.
+A word on honesty. This page shows no star counts, no follower counts and no streak graphics, because those numbers are currently zero and dressing them up would undermine everything else here. The counts that do appear &mdash; seventeen repositories, five divisions, six months, one live deployment &mdash; are all verifiable from the repository list; the portfolio site is counted separately because it is not one of the repositories. One repository, [`foundry`](https://github.com/Tayab-Ahamed/foundry), is a fork of the Ethereum toolchain and is deliberately excluded from the seventeen.
 
 </details>
