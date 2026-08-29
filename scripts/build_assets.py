@@ -174,16 +174,39 @@ def hero(P):
         o.append(text(x, 490, label, 8.5, P["mute"], 600, mono=True, ls=1.6))
         x += max(tw(label, 8.5, mono=True, ls=1.6), 60) + 28
 
-    # ring
-    cx, cy, rad = 880, 300, 168
+    # ring: one dot per repository, grouped into division arcs
+    cx, cy, rad = 880, 322, 138
+    o.append('<g class="fu" style="animation-delay:0.16s">')
+    o.append(text(660, 116, f"THE {N} EXPERIMENTS", 9, P["mute"], 600, mono=True, ls=2.4))
+    o.append(text(660, 138, "One dot per repository, grouped by division.", 11.5, P["mid"]))
+    o.append(text(660, 155, "A line joins two that share three or more technologies.",
+                  11.5, P["mid"]))
+    o.append("</g>")
     o.append('<g class="fi" style="animation-delay:0.3s">')
     o.append(circle(cx, cy, rad, stroke=P["border"], sw=1))
-    o.append(circle(cx, cy, rad - 46, stroke=P["border"], sw=1, opacity=0.5))
     pts = []
     order = sorted(R.REPOS, key=lambda q: (R.DIVISION_INDEX[q["div"]], q["n"]))
     for i, repo in enumerate(order):
         ang = math.radians(-90 + i * 360.0 / N)
         pts.append((cx + rad * math.cos(ang), cy + rad * math.sin(ang), repo))
+    # a coloured arc outside the ring spans the repositories of each division
+    spans = {}
+    for i, repo in enumerate(order):
+        d = R.DIVISION_INDEX[repo["div"]]
+        lo, hi_ = spans.get(d, (i, i))
+        spans[d] = (min(lo, i), max(hi_, i))
+    ar = rad + 15
+    for d, (lo, hi_) in spans.items():
+        a0 = math.radians(-90 + (lo - 0.34) * 360.0 / N)
+        a1 = math.radians(-90 + (hi_ + 0.34) * 360.0 / N)
+        large = 1 if (a1 - a0) > math.pi else 0
+        o.append(path("M%s %s A%s %s 0 %s 1 %s %s" % (
+            r(cx + ar * math.cos(a0)), r(cy + ar * math.sin(a0)), ar, ar, large,
+            r(cx + ar * math.cos(a1)), r(cy + ar * math.sin(a1))),
+            stroke=P["div"][d], sw=3, opacity=0.85))
+        am = (a0 + a1) / 2
+        o.append(text(cx + (ar + 16) * math.cos(am), cy + (ar + 16) * math.sin(am) + 3.5,
+                      str(hi_ - lo + 1), 10, P["mute"], 600, anchor="middle", mono=True))
     # chords between repositories sharing two or more technologies
     k = 0
     for i in range(len(pts)):
@@ -197,6 +220,9 @@ def hero(P):
         o.append('<g class="fu" style="%s">' % delay(0.5 + i * 0.035))
         o.append(circle(x0, y0, 6.5, fill=P["surface"], stroke=dcolor(P, repo), sw=1.6))
         o.append(circle(x0, y0, 3, fill=dcolor(P, repo)))
+        ang = math.radians(-90 + i * 360.0 / N)
+        o.append(text(cx + (rad - 17) * math.cos(ang), cy + (rad - 17) * math.sin(ang) + 3,
+                      f"{repo['n']:02d}", 8.5, P["mute"], 600, anchor="middle", mono=True))
         o.append("</g>")
     o.append(circle(cx, cy, 3.2, fill=P["accent"]))
     o.append(circle(cx, cy, 3.2, fill=P["accent"], cls="pu"))
@@ -207,9 +233,13 @@ def hero(P):
     for i, (key, name, _q) in enumerate(R.DIVISIONS):
         col, row = i % 2, i // 2
         x0 = lx[col]
-        y0 = 508 + row * 22
+        y0 = 512 + row * 22
+        cnt = sum(1 for q in R.REPOS if R.DIVISION_INDEX[q["div"]] == i)
+        o.append('<g class="fu" style="%s">' % delay(0.9 + i * 0.05))
         o.append(circle(x0, y0 - 3.5, 3.4, fill=P["div"][i]))
         o.append(text(x0 + 10, y0, name, 10.5, P["mid"]))
+        o.append(text(x0 + 16 + tw(name, 10.5), y0, str(cnt), 9.5, P["mute"], 600, mono=True))
+        o.append("</g>")
     o.append(corner_ticks(W, H, P, inset=18))
     return "".join(o) + "</svg>"
 
