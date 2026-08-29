@@ -11,8 +11,8 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from draw import (ANIM, DARK, LIGHT, MONO, SANS, arrow, chip, circle, corner_ticks, esc,
-                  head, line, path, r, rect, text, tw)
+from draw import (ANIM, DARK, LIGHT, MONO, SANS, arrow, chip, circle, corner_ticks, delay,
+                  draw_line, esc, head, line, path, r, rect, text, tw)
 import repos as R
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -185,14 +185,19 @@ def hero(P):
         ang = math.radians(-90 + i * 360.0 / N)
         pts.append((cx + rad * math.cos(ang), cy + rad * math.sin(ang), repo))
     # chords between repositories sharing two or more technologies
+    k = 0
     for i in range(len(pts)):
         for j in range(i + 1, len(pts)):
             shared = set(pts[i][2]["tech"]) & set(pts[j][2]["tech"])
-            if len(shared) >= 2:
-                o.append(line(pts[i][0], pts[i][1], pts[j][0], pts[j][1], P["line"], opacity=0.5))
-    for x0, y0, repo in pts:
+            if len(shared) >= 3:
+                o.append(draw_line(pts[i][0], pts[i][1], pts[j][0], pts[j][1], P["line"],
+                                   opacity=0.55, d=0.45 + k * 0.03))
+                k += 1
+    for i, (x0, y0, repo) in enumerate(pts):
+        o.append('<g class="fu" style="%s">' % delay(0.5 + i * 0.035))
         o.append(circle(x0, y0, 6.5, fill=P["surface"], stroke=dcolor(P, repo), sw=1.6))
         o.append(circle(x0, y0, 3, fill=dcolor(P, repo)))
+        o.append("</g>")
     o.append(circle(cx, cy, 3.2, fill=P["accent"]))
     o.append(circle(cx, cy, 3.2, fill=P["accent"], cls="pu"))
     o.append("</g>")
@@ -229,8 +234,9 @@ def registry(P):
         o.append(text(x, 118, label, 8, P["mute"], 600, mono=True, ls=1.8))
     o.append(line(56, 132, 1144, 132, P["border"]))
     y = 132
-    for repo in rows:
+    for ri, repo in enumerate(rows):
         yc = y + rh / 2 + 4
+        o.append('<g class="fu" style="%s">' % delay(0.06 + ri * 0.035))
         o.append(text(56, yc, f"{repo['n']:03d}", 10.5, P["mute"], 400, mono=True))
         o.append(text(132, yc, repo["label"], 13.5, P["ink"], 500))
         nx = 132 + tw(repo["label"], 13.5, ls=0) + 14
@@ -244,6 +250,7 @@ def registry(P):
         o.append(s)
         o.append(text(900, yc, repo["lang"], 11.5, P["mid"]))
         o.append(text(1040, yc, f"{MONTHS[repo['month']]} 2026", 11.5, P["mute"]))
+        o.append("</g>")
         y += rh
         o.append(line(56, y, 1144, y, P["border"], opacity=0.75))
     o.append(text(56, y + 30, "State is derived from the repository itself, not claimed.",
@@ -262,7 +269,7 @@ def lab_map(P):
     desc = "The " + str(N) + " repositories arranged as five research divisions. " + " ".join(
         f"Division {i+1:02d} {name.lower()}: " + ", ".join(x["label"] for x in items) + "."
         for i, (_k, name, _q, items) in enumerate(groups))
-    o = [head(W, H, "Lab map: five research divisions", desc, anim=False)]
+    o = [head(W, H, "Lab map: five research divisions", desc)]
     o.append(rect(0, 0, W, H, fill=P["bg"]))
     o.append(text(56, 46, "LAB MAP", 10.5, P["mute"], 600, mono=True, ls=3.2))
     o.append(text(56, 74, "Five divisions. Seventeen experiments.", 17, P["ink"], 600))
@@ -273,6 +280,7 @@ def lab_map(P):
         x = 56 + col * (cw + gap)
         y = 132 + row * (panel_h + gap)
         c = P["div"][i]
+        o.append('<g class="fu" style="%s">' % delay(0.08 + i * 0.09))
         o.append(rect(x, y, cw, 3, fill=c, rx=1.5))
         o.append(text(x, y + 26, f"DIVISION {i+1:02d}", 9, P["mute"], 600, mono=True, ls=1.8))
         o.append(text(x, y + 46, name, 14.5, P["ink"], 600))
@@ -287,6 +295,7 @@ def lab_map(P):
             o.append(text(x + 16, ry, f"{repo['n']:02d}", 8.5, P["mute"], 600, mono=True, ls=1.4))
             o.append(text(x + 42, ry, repo["label"], 12.5, P["ink"], 500))
             o.append(text(x + 42, ry + 14, repo["blurb"], 10, P["mute"]))
+        o.append("</g>")
     return "".join(o) + "</svg>"
 
 
@@ -322,19 +331,22 @@ def wrap(s, size, max_w, limit=None):
 
 
 def timeline(P):
-    W, H = 1200, 470
+    W, H = 1200, 476
     desc = (f"A timeline of {N} repositories created between March and August 2026, in five "
             "phases: tools first in March, applied systems in April, rigour in May, grounded "
             "and hardened in July, and bounded autonomy in August.")
-    o = [head(W, H, "Research log, March to August 2026", desc, anim=False)]
+    o = [head(W, H, "Research log, March to August 2026", desc)]
     o.append(rect(0, 0, W, H, fill=P["bg"]))
+    o.append('<g class="fu">')
     o.append(text(56, 46, "RESEARCH LOG", 10.5, P["mute"], 600, mono=True, ls=3.2))
     o.append(text(56, 74, "Six months", 17, P["ink"], 600))
     o.append(text(56, 96, f"{N} repositories, in the order they were created.", 12.5, P["mid"]))
+    o.append("</g>")
     cw = (1088 - 4 * 16) / 5
     for i, (month, title, body) in enumerate(PHASES):
         x = 56 + i * (cw + 16)
         count = sum(1 for q in R.REPOS if q["month"] == PHASE_MONTH[i])
+        o.append('<g class="fu" style="%s">' % delay(0.08 + i * 0.09))
         o.append(rect(x, 124, cw, 150, fill=P["panel"], stroke=P["border"], rx=8))
         o.append(rect(x, 124, cw, 2.5, fill=P["accent2"], rx=1.25, opacity=0.4 + i * 0.14))
         o.append(text(x + 16, 152, f"PHASE {i+1:02d}  \u00b7  {month}", 8.5, P["mute"], 600,
@@ -344,19 +356,26 @@ def timeline(P):
             o.append(text(x + 16, 196 + j * 14, ln, 10.5, P["mid"]))
         o.append(line(x + 16, 246, x + cw - 16, 246, P["border"]))
         o.append(text(x + 16, 262, f"{count} repositories", 9.5, P["mute"]))
-    sy = 348
-    x0, x1 = 56, 1092
-    o.append(line(x0, sy, 1144, sy, P["border"]))
+        o.append("</g>")
+
+    # spine: labels alternate above and below so seventeen names have room to breathe
+    sy = 384
+    x0, x1 = 64, 1136
+    o.append(draw_line(x0 - 8, sy, x1 + 8, sy, P["border"], d=0.4))
     step = (x1 - x0) / (N - 1)
     for i, repo in enumerate(sorted(R.REPOS, key=lambda q: q["n"])):
         x = x0 + i * step
         c = dcolor(P, repo)
-        o.append(line(x, sy - 8, x, sy, P["line"]))
-        o.append(circle(x, sy - 12, 4.5, fill=P["surface"], stroke=c, sw=1.6))
-        o.append(circle(x, sy - 12, 2, fill=c))
-        o.append(text(x, sy + 16, f"{repo['n']:02d}", 8.5, P["mute"], anchor="middle", mono=True))
-        o.append("<g transform=\"translate(%s,%s) rotate(-52)\">%s</g>" % (
-            r(x + 5), sy + 30, text(0, 0, repo["label"], 9.5, P["mid"])))
+        up = i % 2 == 0
+        o.append('<g class="fu" style="%s">' % delay(0.55 + i * 0.04))
+        o.append(line(x, sy - (26 if up else 0), x, sy + (0 if up else 26), P["line"]))
+        o.append(circle(x, sy, 4.5, fill=P["surface"], stroke=c, sw=1.6))
+        o.append(circle(x, sy, 2, fill=c))
+        ty = sy - 36 if up else sy + 46
+        o.append(text(x, ty, repo["label"], 10, P["ink"], 500, anchor="middle"))
+        o.append(text(x, ty + (-12 if up else 12), f"{repo['n']:02d}", 8.5, P["mute"], 600,
+                      anchor="middle", mono=True, ls=1))
+        o.append("</g>")
     return "".join(o) + "</svg>"
 
 
@@ -384,83 +403,151 @@ def stack(P):
     desc = (f"Technologies used across the {N} repositories, grouped by role: languages, models, "
             "retrieval, services, interface, perception, assurance, data and runtime. Language "
             "entries show how many repositories use that language as their primary language.")
-    o = [head(W, H, "Instrument inventory", desc, anim=False)]
+    o = [head(W, H, "Instrument inventory", desc)]
     o.append(rect(0, 0, W, H, fill=P["bg"]))
     o.append(text(56, 44, "INSTRUMENT INVENTORY", 10.5, P["mute"], 600, mono=True, ls=3.2))
     o.append(text(56, 68, "Everything below appears in at least one repository.", 13, P["mid"]))
     o.append(line(56, 84, 1144, 84, P["border"]))
-    for role, ry, placed in rows:
+    for gi, (role, ry, placed) in enumerate(rows):
+        o.append('<g class="fu" style="%s">' % delay(0.06 + gi * 0.07))
         o.append(text(lx, ry + 17, role, 9.5, P["mid"], 600, mono=True, ls=2))
         for x, y0, w, label in placed:
             o.append(rect(x, y0, w, 26, fill=P["panel"], stroke=P["border"], rx=6))
             o.append(text(x + 10, y0 + 17.4, label, 12.5, P["ink"]))
+        o.append("</g>")
         last_y = max(p[1] for p in placed)
         o.append(line(56, last_y + 39, 1144, last_y + 39, P["border"]))
     return "".join(o) + "</svg>"
 
 
 # ------------------------------------------------------------------- atlas
+TECH_MIN = 3   # a technology joins the map once three repositories use it
+
+
+def _relax(nodes, iterations=260):
+    """Push overlapping centre nodes apart, keeping them near their home angle."""
+    for _ in range(iterations):
+        moved = False
+        for i in range(len(nodes)):
+            for j in range(i + 1, len(nodes)):
+                a, b = nodes[i], nodes[j]
+                dx, dy = b["x"] - a["x"], b["y"] - a["y"]
+                min_x = (a["w"] + b["w"]) / 2 + 18
+                min_y = 44
+                if abs(dx) < min_x and abs(dy) < min_y:
+                    moved = True
+                    push = (min_y - abs(dy)) / 2 + 0.5
+                    if dy >= 0:
+                        a["y"] -= push
+                        b["y"] += push
+                    else:
+                        a["y"] += push
+                        b["y"] -= push
+        if not moved:
+            break
+    return nodes
+
+
 def atlas(P):
-    W, H = 1200, 952
+    W, H = 1200, 900
+    cx, cy = 600, 528
+    ring = 292
+
     counts = {}
     for repo in R.REPOS:
         for t in repo["tech"]:
             counts[t] = counts.get(t, 0) + 1
-    shared = sorted([kv for kv in counts.items() if kv[1] >= 2], key=lambda kv: (-kv[1], kv[0]))
+    shared = sorted([kv for kv in counts.items() if kv[1] >= TECH_MIN],
+                    key=lambda kv: (-kv[1], kv[0]))
     top = ", ".join(f"{k} in {v} repositories" for k, v in shared[:3])
-    desc = (f"A knowledge graph of the whole laboratory. The {N} repositories sit on a ring, "
-            "grouped into five divisions, and every pair that shares two or more technologies "
-            f"is joined by a chord. The most shared technologies are {top}.")
+    desc = (f"A knowledge graph of the whole laboratory. The {N} repositories sit on an outer "
+            "ring, grouped into five divisions. Every technology shared by three or more of them "
+            "floats in the centre, joined by a line to each repository that uses it. The most "
+            f"shared are {top}.")
     o = [head(W, H, "Technology atlas", desc)]
     o.append(rect(0, 0, W, H, fill=P["bg"]))
     o.append('<g class="fu">')
     o.append(text(56, 58, "TECHNOLOGY ATLAS", 10, P["mute"], 600, mono=True, ls=3))
     o.append(text(56, 96, f"What the {N} share", 30, P["ink"], 600))
-    o.append(text(56, 122, "Two repositories are joined when they share two or more technologies.",
-                  13, P["mid"]))
+    o.append(text(56, 122, "Every technology used by three or more repositories, joined to each "
+                           "repository that uses it.", 13, P["mid"]))
     o.append("</g>")
-    # legend row
     x = 56
     for i, (_k, name, _q) in enumerate(R.DIVISIONS):
+        o.append('<g class="fu" style="%s">' % delay(0.1 + i * 0.05))
         o.append(circle(x, 154, 3.4, fill=P["div"][i]))
         o.append(text(x + 10, 157.5, name, 10, P["mid"]))
+        o.append("</g>")
         x += tw(name, 10) + 42
-    o.append(line(56, 178, 1144, 178, P["border"]))
+    o.append(draw_line(56, 178, 1144, 178, P["border"], d=0.1))
 
-    cx, cy, rad = 600, 578, 268
-    pts = []
+    # outer ring: one node per repository
     order = sorted(R.REPOS, key=lambda q: (R.DIVISION_INDEX[q["div"]], q["n"]))
+    pos = {}
     for i, repo in enumerate(order):
         ang = math.radians(-90 + i * 360.0 / N)
-        pts.append((cx + rad * math.cos(ang), cy + rad * math.sin(ang), ang, repo))
-    o.append(circle(cx, cy, rad, stroke=P["border"], sw=1))
-    o.append('<g class="fi" style="animation-delay:0.2s">')
-    for i in range(len(pts)):
-        for j in range(i + 1, len(pts)):
-            shared_ij = set(pts[i][3]["tech"]) & set(pts[j][3]["tech"])
-            if len(shared_ij) >= 2:
-                strength = min(0.7, 0.26 + 0.14 * len(shared_ij))
-                col = dcolor(P, pts[i][3]) if pts[i][3]["div"] == pts[j][3]["div"] else P["line"]
-                o.append(line(pts[i][0], pts[i][1], pts[j][0], pts[j][1], col, opacity=strength))
+        pos[repo["name"]] = (cx + ring * math.cos(ang), cy + ring * math.sin(ang), ang)
+    o.append(circle(cx, cy, ring, stroke=P["border"], sw=1, opacity=0.9))
+
+    # centre: one node per shared technology, placed near the repositories using it
+    users = {k: [q for q in R.REPOS if k in q["tech"]] for k, _v in shared}
+    hi = shared[0][1]
+    nodes = []
+    for k, v in shared:
+        angs = [pos[q["name"]][2] for q in users[k]]
+        mx = sum(math.cos(a) for a in angs) / len(angs)
+        my = sum(math.sin(a) for a in angs) / len(angs)
+        ang = math.atan2(my, mx)
+        pull = 0.3 + 0.7 * (hi - v) / max(1, hi - TECH_MIN)
+        rad = 44 + 148 * pull
+        nodes.append(dict(k=k, v=v, x=cx + rad * math.cos(ang), y=cy + rad * math.sin(ang),
+                          w=tw(k, 10.5) + 26))
+    _relax(nodes)
+
+    # edges: repository -> technology
+    e = 0
+    o.append('<g class="fi" style="%s">' % delay(0.24))
+    for nd in nodes:
+        for q in users[nd["k"]]:
+            rx, ry, _a = pos[q["name"]]
+            o.append(draw_line(nd["x"], nd["y"], rx, ry, dcolor(P, q), sw=1,
+                               opacity=0.45, d=0.3 + e * 0.012))
+            e += 1
     o.append("</g>")
-    for x0, y0, ang, repo in pts:
+
+    # technology nodes on top of their edges
+    for i, nd in enumerate(nodes):
+        o.append('<g class="fu" style="%s">' % delay(0.42 + i * 0.03))
+        rad = 3.4 + nd["v"] * 0.42
+        o.append(circle(nd["x"], nd["y"], rad + 5.5, fill=P["bg"], opacity=0.92))
+        o.append(circle(nd["x"], nd["y"], rad, fill=P["ink"], opacity=0.82))
+        lw = tw(nd["k"], 10.5)
+        o.append(rect(nd["x"] - lw / 2 - 5, nd["y"] + 9, lw + 10, 15, fill=P["bg"],
+                      rx=4, opacity=0.92))
+        o.append(text(nd["x"], nd["y"] + 20, nd["k"], 10.5, P["ink"], 500, anchor="middle"))
+        o.append(text(nd["x"], nd["y"] + 31, f"\u00b7{nd['v']}", 8.5, P["mute"], 600,
+                      anchor="middle", mono=True))
+        o.append("</g>")
+
+    # repository nodes and their labels
+    for i, repo in enumerate(order):
+        x0, y0, ang = pos[repo["name"]]
         c = dcolor(P, repo)
+        o.append('<g class="fu" style="%s">' % delay(0.18 + i * 0.03))
         o.append(circle(x0, y0, 7, fill=P["surface"], stroke=c, sw=1.7))
         o.append(circle(x0, y0, 3.2, fill=c))
-        lx0 = cx + (rad + 18) * math.cos(ang)
-        ly0 = cy + (rad + 18) * math.sin(ang) + 4
+        lx0 = cx + (ring + 18) * math.cos(ang)
+        ly0 = cy + (ring + 18) * math.sin(ang) + 4
         anchor = "start" if math.cos(ang) > 0.08 else ("end" if math.cos(ang) < -0.08 else "middle")
         if anchor == "middle":
             ly0 += 8 if math.sin(ang) > 0 else -8
         o.append(text(lx0, ly0, repo["label"], 11.5, P["ink"], 500, anchor=anchor))
         o.append(text(lx0, ly0 + 14, f"EXP-{repo['n']:02d}", 8.5, P["mute"], 600, anchor=anchor,
                       mono=True, ls=1.2))
-    # centre readout
-    o.append(circle(cx, cy, 96, fill=P["bg"], stroke=P["border"], sw=1, opacity=0.95))
-    o.append(text(cx, cy - 34, "MOST SHARED", 8.5, P["mute"], 600, anchor="middle", mono=True, ls=1.8))
-    for i, (k, v) in enumerate(shared[:4]):
-        o.append(text(cx - 62, cy - 10 + i * 20, k, 11.5, P["ink"]))
-        o.append(text(cx + 62, cy - 10 + i * 20, f"\u00b7{v}", 11.5, P["mute"], anchor="end"))
+        o.append("</g>")
+
+    o.append(circle(cx, cy, 2.6, fill=P["accent"]))
+    o.append(circle(cx, cy, 2.6, fill=P["accent"], cls="pu"))
     return "".join(o) + "</svg>"
 
 
@@ -475,7 +562,7 @@ def substrate(P):
     desc = (f"A matrix of {len(rows)} shared layers against the {N} repositories. A filled cell "
             "means that repository uses that layer. The layers are "
             + ", ".join(n.lower() for _k, n in rows) + ".")
-    o = [head(W, H, "Repository relationship matrix", desc, anim=False)]
+    o = [head(W, H, "Repository relationship matrix", desc)]
     o.append(rect(0, 0, W, H, fill=P["bg"]))
     o.append(text(56, 46, "REPOSITORY RELATIONSHIPS", 10.5, P["mute"], 600, mono=True, ls=3.2))
     o.append(text(56, 74, "What the systems share", 17, P["ink"], 600))
@@ -491,7 +578,8 @@ def substrate(P):
         o.append(text(x, H - 46, f"{repo['n']:02d}", 8.5, P["mute"], anchor="middle", mono=True))
         o.append(rect(x - 9, H - 38, 18, 2.5, fill=dcolor(P, repo), rx=1.25))
     y = top
-    for key, name in rows:
+    for li, (key, name) in enumerate(rows):
+        o.append('<g class="fu" style="%s">' % delay(0.1 + li * 0.06))
         o.append(text(340, y + 4, name, 11.5, P["ink"], anchor="end"))
         o.append(line(x0 - 20, y - 13, 1160, y - 13, P["border"], opacity=0.7))
         for i, repo in enumerate(order):
@@ -502,6 +590,7 @@ def substrate(P):
                 o.append(circle(x, y, 3, fill=P["panel2"], stroke=P["border"], sw=1))
         count = sum(1 for q in order if key in q["layers"])
         o.append(text(1176, y + 4, str(count), 10, P["mute"], anchor="end", mono=True))
+        o.append("</g>")
         y += rh
     o.append(line(x0 - 20, y - 13, 1160, y - 13, P["border"], opacity=0.7))
     return "".join(o) + "</svg>"

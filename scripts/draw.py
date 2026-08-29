@@ -7,9 +7,11 @@ ANIM = (
     "<style>.fu{animation:fu .75s cubic-bezier(.16,.84,.44,1) both}"
     "@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}"
     ".fi{animation:fi .9s ease both}@keyframes fi{from{opacity:0}to{opacity:1}}"
+    ".dr{animation:dr 1.5s cubic-bezier(.4,0,.2,1) both}"
+    "@keyframes dr{from{stroke-dashoffset:var(--L)}to{stroke-dashoffset:0}}"
     ".pu{transform-box:fill-box;transform-origin:center;animation:pu 3.4s ease-in-out infinite}"
     "@keyframes pu{0%,100%{opacity:.14;transform:scale(1)}50%{opacity:.42;transform:scale(1.85)}}"
-    "@media(prefers-reduced-motion:reduce){.fu,.fi,.pu{animation:none!important}}</style>"
+    "@media(prefers-reduced-motion:reduce){.fu,.fi,.dr,.pu{animation:none!important}}</style>"
 )
 
 LIGHT = dict(
@@ -49,6 +51,26 @@ def tw(s, size, mono=False, ls=0.0):
     return total - ls
 
 
+def _cs(cls=None, style=None):
+    """Render optional class and inline style attributes."""
+    c = f' class="{cls}"' if cls else ""
+    y = f' style="{style}"' if style else ""
+    return c + y
+
+
+def delay(seconds):
+    """An animation-delay inline style, rounded to avoid float noise."""
+    return f"animation-delay:{round(seconds, 3)}s"
+
+
+def draw_line(x1, y1, x2, y2, stroke="#D4D4D0", sw=1, opacity=None, d=0.0):
+    """A line that draws itself in, left to right, on load."""
+    import math as _m
+    L = round(_m.hypot(x2 - x1, y2 - y1), 2)
+    return line(x1, y1, x2, y2, stroke, sw, opacity, dash=L, cls="dr",
+                style=f"--L:{L};{delay(d)}")
+
+
 def esc(s):
     return (str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
             .replace('"', "&quot;"))
@@ -64,41 +86,44 @@ def head(w, h, title, desc, anim=True):
 
 
 def text(x, y, s, size=12, fill="#171715", weight=400, anchor=None, mono=False, ls=None,
-         opacity=None):
+         opacity=None, cls=None, style=None):
     a = f' text-anchor="{anchor}"' if anchor else ""
     m = f' font-family="{MONO}"' if mono else ""
     l = f' letter-spacing="{ls}"' if ls else ""
     o = f' opacity="{opacity}"' if opacity is not None else ""
     return (f'<text x="{r(x)}" y="{r(y)}" font-size="{size}" fill="{fill}" '
-            f'font-weight="{weight}"{a}{m}{l}{o}>{esc(s)}</text>')
+            f'font-weight="{weight}"{a}{m}{l}{o}{_cs(cls, style)}>{esc(s)}</text>')
 
 
-def rect(x, y, w, h, fill="none", stroke=None, rx=0, sw=1, opacity=None):
+def rect(x, y, w, h, fill="none", stroke=None, rx=0, sw=1, opacity=None, cls=None,
+         style=None):
     s = f' stroke="{stroke}" stroke-width="{sw}"' if stroke else ""
     o = f' opacity="{opacity}"' if opacity is not None else ""
     return (f'<rect x="{r(x)}" y="{r(y)}" width="{r(w)}" height="{r(h)}" rx="{rx}" '
-            f'fill="{fill}"{s}{o}/>')
+            f'fill="{fill}"{s}{o}{_cs(cls, style)}/>')
 
 
-def line(x1, y1, x2, y2, stroke="#D4D4D0", sw=1, opacity=None, dash=None):
+def line(x1, y1, x2, y2, stroke="#D4D4D0", sw=1, opacity=None, dash=None, cls=None,
+         style=None):
     o = f' opacity="{opacity}"' if opacity is not None else ""
     d = f' stroke-dasharray="{dash}"' if dash else ""
     return (f'<line x1="{r(x1)}" y1="{r(y1)}" x2="{r(x2)}" y2="{r(y2)}" stroke="{stroke}" '
-            f'stroke-width="{sw}" stroke-linecap="butt"{o}{d}/>')
+            f'stroke-width="{sw}" stroke-linecap="butt"{o}{d}{_cs(cls, style)}/>')
 
 
-def circle(cx, cy, rad, fill="none", stroke=None, sw=1, opacity=None, cls=None):
+def circle(cx, cy, rad, fill="none", stroke=None, sw=1, opacity=None, cls=None,
+           style=None):
     s = f' stroke="{stroke}" stroke-width="{sw}"' if stroke else ""
     o = f' opacity="{opacity}"' if opacity is not None else ""
-    c = f' class="{cls}"' if cls else ""
-    return f'<circle cx="{r(cx)}" cy="{r(cy)}" r="{r(rad)}" fill="{fill}"{s}{o}{c}/>'
+    return f'<circle cx="{r(cx)}" cy="{r(cy)}" r="{r(rad)}" fill="{fill}"{s}{o}{_cs(cls, style)}/>'
 
 
-def path(d, fill="none", stroke=None, sw=1, opacity=None, dash=None):
+def path(d, fill="none", stroke=None, sw=1, opacity=None, dash=None, cls=None,
+         style=None):
     s = f' stroke="{stroke}" stroke-width="{sw}" stroke-linecap="round" stroke-linejoin="round"' if stroke else ""
     o = f' opacity="{opacity}"' if opacity is not None else ""
     da = f' stroke-dasharray="{dash}"' if dash else ""
-    return f'<path d="{d}" fill="{fill}"{s}{o}{da}/>'
+    return f'<path d="{d}" fill="{fill}"{s}{o}{da}{_cs(cls, style)}/>'
 
 
 def chip(x, y, label, P, size=10, h=18, pad=8, fill=None, stroke=None, color=None):
