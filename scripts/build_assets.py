@@ -19,7 +19,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS = os.path.join(ROOT, "assets")
 CARDS = os.path.join(ASSETS, "cards")
 
-MONTHS = {"Mar": "March", "Apr": "April", "May": "May", "Jul": "July", "Aug": "August"}
+MONTHS = {"Mar": "March", "Apr": "April", "May": "May", "Jul": "July", "Aug": "August", "Oct": "October"}
 N = len(R.REPOS)
 
 
@@ -75,6 +75,25 @@ def emblem(kind, P):
         for i, h in enumerate((10, 18, 26)):
             o.append(rect(32 + i * 11, 56 - h, 7, h, fill=a if i == 2 else sf,
                           stroke=nd if i != 2 else None, rx=1.5))
+    elif kind == "scopeshift":
+        o.append(path("M22 16 h28 l14 14 v42 h-42 z", fill=sf, stroke=nd, sw=1.4))
+        o.append(path("M50 16 v14 h14", fill="none", stroke=nd, sw=1.2))
+        o.append(line(28, 36, 46, 36, ln))
+        o.append(line(28, 43, 56, 43, ln))
+        o.append(line(28, 50, 42, 50, ln))
+        o.append(rect(40, 52, 24, 20, fill=sf, stroke=a, sw=1.6, rx=4))
+        o.append(path("M45 62 l4 4 l8 -8", stroke=a, sw=1.8))
+        o.append(path("M28 26 v4 h4 v-4 h-4 z M35 26 v4 h4 v-4 h-4 z", fill=a))
+    elif kind == "foodwise":
+        o.append(path("M22 42 a20 20 0 0 1 35 -14", stroke=ln, sw=1.3, fill="none"))
+        o.append(path("M62 42 a20 20 0 0 1 -35 14", stroke=a, sw=1.5, fill="none"))
+        o.append(path("M57 28 l-1 -6 M57 28 l-6 1", stroke=ln, sw=1.3))
+        o.append(path("M27 56 l1 6 M27 56 l6 -1", stroke=a, sw=1.5))
+        o.append(line(24, 52, 60, 52, nd, sw=1.5))
+        o.append(path("M28 52 a14 14 0 0 1 28 0 z", fill=sf, stroke=nd, sw=1.4))
+        o.append(circle(42, 36, 2.5, fill=a))
+        o.append(path("M42 34 c-4 -7 0 -14 7 -14 c0 7 -3 14 -7 14 z", fill=a))
+        o.append(line(42, 34, 42, 26, a, sw=1.3))
     return "<g transform=\"translate(24,22)\">" + "".join(o) + "</g>"
 
 
@@ -84,6 +103,8 @@ EMBLEM = {
     "Actionguard-Autoaudit": ("shield-loop", "a shield around a remediation loop"),
     "Airgap-noc-Copilot": ("airgap", "two node clusters split by a dashed air gap"),
     "RecoverOS": ("recover", "a recovery loop lifting three rising bars"),
+    "ScopeShift": ("scopeshift", "a code citation document locked to a tamper-evident hash ledger"),
+    "FoodWise-AI": ("foodwise", "a kitchen cloche with recovery flow loop and organic balance sprout"),
 }
 
 
@@ -143,7 +164,7 @@ def hero(P):
             f"{N} experiments arranged on a ring in five divisions -- autonomous agents, "
             f"grounded retrieval, perception and vision, systems and simulation, security and "
             f"assurance -- joined by the technologies they share. Readouts: {N} experiments, "
-            f"5 divisions, 6 months, 1 live deployment.")
+            f"5 divisions, 8 months, 1 live deployment.")
     o = [head(W, H, "Tayab Ahamed N -- AI Research and Engineering Lab", desc)]
     o.append(rect(0, 0, W, H, fill=P["bg"]))
     o.append('<g class="fu">')
@@ -166,7 +187,7 @@ def hero(P):
         o.append(text(56, 330 + i * 22, ln, 13.5, P["mid"]))
     o.append("</g>")
 
-    stats = [(str(N), "EXPERIMENTS"), ("5", "DIVISIONS"), ("6", "MONTHS"), ("1", "LIVE DEPLOYMENT")]
+    stats = [(str(N), "EXPERIMENTS"), ("5", "DIVISIONS"), ("8", "MONTHS"), ("1", "LIVE DEPLOYMENT")]
     o.append(line(56, 420, 560, 420, P["border"]))
     x = 56
     for i, (val, label) in enumerate(stats):
@@ -302,7 +323,7 @@ def lab_map(P):
     o = [head(W, H, "Lab map: five research divisions", desc)]
     o.append(rect(0, 0, W, H, fill=P["bg"]))
     o.append(text(56, 46, "LAB MAP", 10.5, P["mute"], 600, mono=True, ls=3.2))
-    o.append(text(56, 74, "Five divisions. Seventeen experiments.", 17, P["ink"], 600))
+    o.append(text(56, 74, f"Five divisions. {N} experiments.", 17, P["ink"], 600))
     o.append(text(56, 96, "Grouped by the question the work is asking, not by language.", 12.5, P["mid"]))
     o.append(line(56, 112, 1144, 112, P["border"]))
     for i, (_key, name, question, items) in enumerate(groups):
@@ -332,8 +353,8 @@ def lab_map(P):
 # ---------------------------------------------------------------- timeline
 PHASES = [
     ("MARCH", "Tools first",
-     "A forensics engine, a repo auditor, a detector and a deployment platform. "
-     "Instruments before experiments."),
+     "A forensics engine, repo auditor, detector and deployment platform. "
+     "Instruments first."),
     ("APRIL", "Applied systems",
      "Simulation, sensing and orchestration. The instruments get pointed at real domains."),
     ("MAY", "Rigour",
@@ -342,8 +363,10 @@ PHASES = [
      "Retrieval that cites, plus three systems whose whole job is proving a pipeline is intact."),
     ("AUGUST", "Bounded autonomy",
      "Agents that act on money and on networks, under policy, offline, with an audit trail."),
+    ("OCTOBER", "Deterministic flows",
+     "BRD governance with citation proofs, and kitchen mass-balance flow simulation."),
 ]
-PHASE_MONTH = ["Mar", "Apr", "May", "Jul", "Aug"]
+PHASE_MONTH = ["Mar", "Apr", "May", "Jul", "Aug", "Oct"]
 
 
 def wrap(s, size, max_w, limit=None):
@@ -362,17 +385,17 @@ def wrap(s, size, max_w, limit=None):
 
 def timeline(P):
     W, H = 1200, 476
-    desc = (f"A timeline of {N} repositories created between March and August 2026, in five "
+    desc = (f"A timeline of {N} repositories created between March and October 2026, in six "
             "phases: tools first in March, applied systems in April, rigour in May, grounded "
-            "and hardened in July, and bounded autonomy in August.")
-    o = [head(W, H, "Research log, March to August 2026", desc)]
+            "and hardened in July, bounded autonomy in August, and deterministic flows in October.")
+    o = [head(W, H, "Research log, March to October 2026", desc)]
     o.append(rect(0, 0, W, H, fill=P["bg"]))
     o.append('<g class="fu">')
     o.append(text(56, 46, "RESEARCH LOG", 10.5, P["mute"], 600, mono=True, ls=3.2))
-    o.append(text(56, 74, "Six months", 17, P["ink"], 600))
+    o.append(text(56, 74, "Eight months", 17, P["ink"], 600))
     o.append(text(56, 96, f"{N} repositories, in the order they were created.", 12.5, P["mid"]))
     o.append("</g>")
-    cw = (1088 - 4 * 16) / 5
+    cw = (1088 - (len(PHASES) - 1) * 16) / len(PHASES)
     for i, (month, title, body) in enumerate(PHASES):
         x = 56 + i * (cw + 16)
         count = sum(1 for q in R.REPOS if q["month"] == PHASE_MONTH[i])

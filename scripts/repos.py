@@ -21,7 +21,7 @@ DIVISIONS = [
 
 DIVISION_INDEX = {k: i for i, (k, _n, _q) in enumerate(DIVISIONS)}
 
-# exp number is creation order across the 17 original repositories.
+# exp number is creation order across the 19 original repositories.
 REPOS = [
     dict(n=1, name="FaultSeeker-", label="FaultSeeker", div="agents",
          blurb="Blockchain transaction forensics", lang="Python", licence="Apache-2.0",
@@ -125,6 +125,18 @@ REPOS = [
          pipeline=["Detect", "Decide", "Bound", "Execute", "Prove"],
          tech=["Python", "LLM routing", "Policy engine", "Attestation", "Audit trail"],
          layers=["routing", "scoring", "attest"]),
+    dict(n=18, name="ScopeShift", label="ScopeShift", div="assurance",
+         blurb="Deterministic evidence governance & BRD verification", lang="Python", licence="MIT",
+         created="2026-10-04", month="Oct", home="",
+         pipeline=["Ingest", "Gate", "Ledger", "Resolve", "Publish"],
+         tech=["Python", "FastAPI", "Gemini", "Vertex AI", "BigQuery", "SQLite", "Three.js", "Attestation", "Audit trail", "Docker"],
+         layers=["routing", "grounding", "attest", "fastapi"]),
+    dict(n=19, name="FoodWise-AI", label="FoodWise AI", div="systems",
+         blurb="Sustainable kitchen demand forecasting & mass accounting", lang="TypeScript", licence="",
+         created="2026-10-09", month="Oct", home="",
+         pipeline=["Observe", "Forecast", "Approve", "Account", "Recover"],
+         tech=["TypeScript", "React", "Vite", "FastAPI", "Python", "SQLite", "Groq", "Llama", "Simulation"],
+         layers=["simulate", "fallback", "react", "fastapi", "scoring"]),
 ]
 
 # Shared layers used by the relationship matrix, in display order.
@@ -144,14 +156,14 @@ LAYERS = [
 
 # Instrument inventory, grouped by role.
 STACK = [
-    ("LANGUAGES", ["Python \u00b710", "TypeScript \u00b74", "JavaScript \u00b73", "Go"]),
-    ("MODELS", ["Claude", "GPT", "Gemini", "Llama 3.2 Vision", "Qwen", "Groq", "Ollama", "Local LLM"]),
+    ("LANGUAGES", ["Python \u00b711", "TypeScript \u00b75", "JavaScript \u00b73", "Go"]),
+    ("MODELS", ["Claude", "GPT", "Gemini", "Vertex AI", "Llama 3.2 Vision", "Qwen", "Groq", "Ollama", "Local LLM"]),
     ("RETRIEVAL", ["LangChain", "LangGraph", "ChromaDB", "FAISS", "Vector search"]),
     ("SERVICES", ["FastAPI", "Flask", "Node.js", "Streamlit", "n8n", "Nginx"]),
-    ("INTERFACE", ["React", "Next.js", "Vite", "Tailwind"]),
+    ("INTERFACE", ["React", "Next.js", "Vite", "Tailwind", "Three.js"]),
     ("PERCEPTION", ["YOLOv8", "OpenCV", "PyTorch", "Flower"]),
     ("ASSURANCE", ["zizmor", "SAST", "GitHub Actions", "OpenTelemetry", "LitmusChaos"]),
-    ("DATA AND RUNTIME", ["Docker", "Kubernetes", "k3s", "MongoDB", "SUMO", "Containerlab"]),
+    ("DATA AND RUNTIME", ["Docker", "Kubernetes", "k3s", "MongoDB", "SQLite", "BigQuery", "SUMO", "Containerlab"]),
 ]
 
 

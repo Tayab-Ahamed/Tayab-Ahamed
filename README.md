@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
-  <img alt="Tayab Ahamed, AI Research and Engineering Lab. A plot of seventeen repositories: the horizontal axis is the month each was created from March to August 2026, the five rows are the research divisions, and the lines between points mark technology or design decisions that two repositories share." src="assets/hero.svg" width="100%">
+  <img alt="Tayab Ahamed, AI Research and Engineering Lab. A plot of nineteen repositories: the horizontal axis is the month each was created from March to October 2026, the five rows are the research divisions, and the lines between points mark technology or design decisions that two repositories share." src="assets/hero.svg" width="100%">
 </picture>
 
 </div>
@@ -11,7 +11,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/registry-dark.svg">
-  <img alt="Experiment registry. Seventeen numbered experiments, 001 to 017, each listed with its division, state, primary language and month opened. State is derived from evidence: deployed means a public URL exists, open means an OSI licence is declared, prototype means neither." src="assets/registry.svg" width="100%">
+  <img alt="Experiment registry. Nineteen numbered experiments, 001 to 019, each listed with its division, state, primary language and month opened. State is derived from evidence: deployed means a public URL exists, open means an OSI licence is declared, prototype means neither." src="assets/registry.svg" width="100%">
 </picture>
 
 </div>
@@ -20,7 +20,7 @@
 
 ### Building AI systems that assume the model can be wrong.
 
-Seventeen experiments. Every one of them is the same question in a different domain.
+Nineteen experiments. Every one of them is the same question in a different domain.
 
 [**Portfolio &mdash; a live retrieval assistant you can interrogate &rarr;**](https://project-tayab.onrender.com/)
 
@@ -37,7 +37,7 @@ Five divisions. Grouped by the question the work asks, not the language it happe
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/lab-map-dark.svg">
-  <img alt="Lab map. Five research divisions holding seventeen experiments. Division 01 autonomous agents: FaultSeeker, RepoMedic-Agent, neuroops, Airgap NOC Copilot, RecoverOS. Division 02 grounded retrieval: StudyMind, AI-Sakhi, VetAid. Division 03 perception and vision: Pothole-Detection, ecosentinel, ReloopAI. Division 04 systems and simulation: Deploy-Platform, LifeSim-AI, SETRS-Trajectory-Preemption. Division 05 security and assurance: Sentinel-FL, Actionguard Autoaudit, Actionguard CI." src="assets/lab-map.svg" width="100%">
+  <img alt="Lab map. Five research divisions holding nineteen experiments. Division 01 autonomous agents: FaultSeeker, RepoMedic-Agent, neuroops, Airgap NOC Copilot, RecoverOS. Division 02 grounded retrieval: StudyMind, AI-Sakhi, VetAid. Division 03 perception and vision: Pothole-Detection, ecosentinel, ReloopAI. Division 04 systems and simulation: Deploy-Platform, LifeSim-AI, SETRS-Trajectory-Preemption, FoodWise AI. Division 05 security and assurance: Sentinel-FL, Actionguard Autoaudit, Actionguard CI, ScopeShift." src="assets/lab-map.svg" width="100%">
 </picture>
 
 <picture>
@@ -88,7 +88,7 @@ flowchart LR
 | **Repository** | [FaultSeeker-](https://github.com/Tayab-Ahamed/FaultSeeker-) |
 | **Status** | Open source, no public deployment |
 
-> Carries a LaTeX survey paper alongside the code. The only repo of the seventeen with an outside fork.
+> Carries a LaTeX survey paper alongside the code. The only repo of the nineteen with an outside fork.
 
 </details>
 
@@ -501,7 +501,7 @@ flowchart LR
 | **Status** | **Live** &mdash; deployed and reachable |
 | **Live** | [reloop-ai-liart.vercel.app](https://reloop-ai-liart.vercel.app) |
 
-> The only experiment with a public deployment, and the most committed-to of the seventeen.
+> The only experiment with a public deployment, and the most committed-to of the nineteen.
 
 </details>
 
@@ -630,6 +630,46 @@ flowchart LR
 | **Status** | Prototype, no public deployment |
 
 > The strongest case for simulating first -- the failure mode here is measured in lives.
+
+</details>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-FoodWise-AI-dark.svg">
+  <img alt="EXP-19 FoodWise AI. Sustainable kitchen demand forecasting & mass accounting. Division: Systems and Simulation. Language: TypeScript. Pipeline: Observe then Forecast then Approve then Account then Recover." src="assets/cards/card-FoodWise-AI.svg" width="100%">
+</picture>
+
+[**FoodWise AI &rarr;**](https://github.com/Tayab-Ahamed/FoodWise-AI)
+
+<details>
+<summary><b>Open the notebook</b> &mdash; EXP-19 FoodWise AI</summary>
+
+**Objective.** Prevent kitchen food waste and shortage risk before service through demand forecasting, mass-balance accounting, and responsible surplus recovery.
+
+**The problem.** Preparing less food is useful only if everyone can still eat. Kitchen decisions balance uncertainty between waste and shortage, but most tools either guess without evidence or track waste only after it is discarded.
+
+**Architecture.** A local-first architecture combining attendance-based demand forecasting with uncertainty intervals, preparation quantity approval, post-meal mass-balance logging (`Prepared = Consumed + Surplus + Plate Waste`), and documented recovery workflows.
+
+```mermaid
+flowchart LR
+    S0("Observe")
+    S1("Forecast")
+    S2("Approve")
+    S3("Account")
+    S4("Recover")
+    S0 --> S1 --> S2 --> S3 --> S4
+```
+
+| | |
+|---|---|
+| **Stack** | TypeScript &middot; React 19 &middot; Vite 6 &middot; Tailwind CSS &middot; FastAPI &middot; Python &middot; SQLite &middot; Groq &middot; Llama |
+| **Language** | TypeScript |
+| **Licence** | none declared |
+| **Created** | 9 October 2026 |
+| **Topics** | `ai-for-sustainability` &middot; `demand-forecasting` &middot; `fastapi` &middot; `food-waste-reduction` &middot; `groq` &middot; `machine-learning` &middot; `react` &middot; `sustainable-food-systems` |
+| **Repository** | [FoodWise-AI](https://github.com/Tayab-Ahamed/FoodWise-AI) |
+| **Status** | Prototype, no public deployment |
+
+> Preparing less is useful only if everyone can still eat -- simulate the shortage before service begins.
 
 </details>
 
@@ -763,6 +803,45 @@ flowchart LR
 </details>
 
 <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cards/card-ScopeShift-dark.svg">
+  <img alt="EXP-18 ScopeShift. Deterministic evidence governance & BRD verification. Division: Security and Assurance. Language: Python. Pipeline: Ingest then Gate then Ledger then Resolve then Publish." src="assets/cards/card-ScopeShift.svg" width="100%">
+</picture>
+
+[**ScopeShift &rarr;**](https://github.com/Tayab-Ahamed/ScopeShift)
+
+<details>
+<summary><b>Open the notebook</b> &mdash; EXP-18 ScopeShift</summary>
+
+**Objective.** Decouple multimodal LLM extraction from specification authority through code-level citation proofs and tamper-evident event streaming.
+
+**The problem.** Modern AI agents suffer from unauthorized visual scope creep—observing a button or mock UI causes models to silently fabricate specifications without stakeholder approval.
+
+**Architecture.** A fail-closed pipeline with verbatim citation proofs against source documents, spatial bounding box validation for UI mocks, an append-only SHA-256 hash-chained event ledger, and a pure state machine resolver that deterministically projects the governed BRD specification.
+
+```mermaid
+flowchart LR
+    S0("Ingest")
+    S1("Gate")
+    S2("Ledger")
+    S3("Resolve")
+    S4("Publish")
+    S0 --> S1 --> S2 --> S3 --> S4
+```
+
+| | |
+|---|---|
+| **Stack** | Python &middot; FastAPI &middot; Gemini &middot; Vertex AI &middot; BigQuery &middot; SQLite &middot; Pydantic &middot; Three.js &middot; SHA-256 Ledger &middot; Docker |
+| **Language** | Python |
+| **Licence** | MIT |
+| **Created** | 4 October 2026 |
+| **Repository** | [ScopeShift](https://github.com/Tayab-Ahamed/ScopeShift) |
+| **Status** | Open source, no public deployment |
+
+> Seeing a button is not approving the button -- extraction is decoupled from authority.
+
+</details>
+
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/divider-dark.svg">
   <img alt="" src="assets/divider.svg" width="100%">
 </picture>
@@ -771,14 +850,14 @@ flowchart LR
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/atlas-dark.svg">
-  <img alt="Technology atlas. A knowledge graph of the whole laboratory: seventeen repositories sit on a ring grouped into five divisions, and every pair that shares two or more technologies is joined by a chord. The most shared technologies are Python, React and multi-provider LLM routing." src="assets/atlas.svg" width="100%">
+  <img alt="Technology atlas. A knowledge graph of the whole laboratory: nineteen repositories sit on a ring grouped into five divisions, and every pair that shares two or more technologies is joined by a chord. The most shared technologies are Python, React and multi-provider LLM routing." src="assets/atlas.svg" width="100%">
 </picture>
 
 These repositories were not planned as an ecosystem. The connections are there anyway, because the same conclusions kept getting reached. Read across a row to see who shares a decision; read down a column to see what a system is made of.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/substrate-dark.svg">
-  <img alt="Repository relationship matrix. Eleven shared layers plotted against the seventeen repositories, with a filled cell where a repository uses that layer. The layers are model routing, deterministic fallback, grounding and citation, weighted scoring, vector retrieval, vision inference, audit trail and attestation, FastAPI services, React front ends, container and cluster, and simulate before shipping." src="assets/substrate.svg" width="100%">
+  <img alt="Repository relationship matrix. Eleven shared layers plotted against the nineteen repositories, with a filled cell where a repository uses that layer. The layers are model routing, deterministic fallback, grounding and citation, weighted scoring, vector retrieval, vision inference, audit trail and attestation, FastAPI services, React front ends, container and cluster, and simulate before shipping." src="assets/substrate.svg" width="100%">
 </picture>
 
 <details>
@@ -794,12 +873,12 @@ flowchart TB
         SIM("Simulate before shipping")
         ATTEST("Audit trail and attestation")
     end
-    ROUTE --> FaultSeeker & ReloopAI & LifeSim
-    FALL --> ReloopAI & LifeSim & AISakhi & FaultSeeker
-    CITE --> AISakhi & VetAid & StudyMind & Airgap
-    SCORE --> ReloopAI & AISakhi & RepoMedic & Airgap & ActionguardCI
-    SIM --> SETRS & neuroops & LifeSim
-    ATTEST --> SentinelFL & ActionguardCI & Autoaudit & RecoverOS
+    ROUTE --> FaultSeeker & ReloopAI & LifeSim & ScopeShift
+    FALL --> ReloopAI & LifeSim & AISakhi & FaultSeeker & FoodWise
+    CITE --> AISakhi & VetAid & StudyMind & Airgap & ScopeShift
+    SCORE --> ReloopAI & AISakhi & RepoMedic & Airgap & ActionguardCI & FoodWise
+    SIM --> SETRS & neuroops & LifeSim & FoodWise
+    ATTEST --> SentinelFL & ActionguardCI & Autoaudit & RecoverOS & ScopeShift
     FaultSeeker("FaultSeeker")
     ReloopAI("ReloopAI")
     LifeSim("LifeSim-AI")
@@ -814,6 +893,8 @@ flowchart TB
     Autoaudit("Actionguard Autoaudit")
     Airgap("Airgap NOC Copilot")
     RecoverOS("RecoverOS")
+    ScopeShift("ScopeShift")
+    FoodWise("FoodWise-AI")
 ```
 
 </details>
@@ -834,15 +915,15 @@ AI-Sakhi attributes to the page and refuses below a distance threshold. VetAid p
 
 **03 &nbsp; Simulate before it reaches the world**
 
-SETRS proves an ambulance corridor in SUMO before touching an intersection. neuroops benchmarks its own agent against injected chaos. LifeSim keeps a deterministic engine authoritative over the narration.
+SETRS proves an ambulance corridor in SUMO before touching an intersection. neuroops benchmarks its own agent against injected chaos. LifeSim keeps a deterministic engine authoritative over the narration. FoodWise AI models demand and uncertainty before kitchen service begins.
 
-<sub>[SETRS](https://github.com/Tayab-Ahamed/SETRS-Trajectory-Preemption) &middot; [neuroops](https://github.com/Tayab-Ahamed/neuroops) &middot; [LifeSim-AI](https://github.com/Tayab-Ahamed/LifeSim-AI)</sub>
+<sub>[SETRS](https://github.com/Tayab-Ahamed/SETRS-Trajectory-Preemption) &middot; [neuroops](https://github.com/Tayab-Ahamed/neuroops) &middot; [LifeSim-AI](https://github.com/Tayab-Ahamed/LifeSim-AI) &middot; [FoodWise-AI](https://github.com/Tayab-Ahamed/FoodWise-AI)</sub>
 
 **04 &nbsp; Prove it, or it did not happen**
 
-The newest division exists because the other three kept running into the same wall. Sentinel-FL signs the repair so the fix can be verified by whoever consumes the model. Actionguard CI is allowed to fail the build. Actionguard Autoaudit delivers its findings as a pull request rather than a report. RecoverOS will not touch money outside a policy bound, and writes what it did to an audit trail.
+The newest division exists because the other three kept running into the same wall. Sentinel-FL signs the repair so the fix can be verified by whoever consumes the model. Actionguard CI is allowed to fail the build. Actionguard Autoaudit delivers its findings as a pull request rather than a report. RecoverOS will not touch money outside a policy bound, and writes what it did to an audit trail. ScopeShift locks requirement decisions to tamper-evident SHA-256 event streams.
 
-<sub>[Sentinel-FL](https://github.com/Tayab-Ahamed/Sentinel-FL) &middot; [Actionguard CI](https://github.com/Tayab-Ahamed/Actionguard-CI) &middot; [Actionguard Autoaudit](https://github.com/Tayab-Ahamed/Actionguard-Autoaudit) &middot; [RecoverOS](https://github.com/Tayab-Ahamed/RecoverOS)</sub>
+<sub>[Sentinel-FL](https://github.com/Tayab-Ahamed/Sentinel-FL) &middot; [Actionguard CI](https://github.com/Tayab-Ahamed/Actionguard-CI) &middot; [Actionguard Autoaudit](https://github.com/Tayab-Ahamed/Actionguard-Autoaudit) &middot; [RecoverOS](https://github.com/Tayab-Ahamed/RecoverOS) &middot; [ScopeShift](https://github.com/Tayab-Ahamed/ScopeShift)</sub>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/divider-dark.svg">
@@ -865,7 +946,7 @@ The newest division exists because the other three kept running into the same wa
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/timeline-dark.svg">
-  <img alt="Research log from March to August 2026 in five phases: tools first in March, applied systems in April, rigour in May, grounded and hardened in July, and bounded autonomy in August. Seventeen repositories are plotted on a spine in creation order." src="assets/timeline.svg" width="100%">
+  <img alt="Research log from March to October 2026 in six phases: tools first in March, applied systems in April, rigour in May, grounded and hardened in July, bounded autonomy in August, and deterministic flows in October. Nineteen repositories are plotted on a spine in creation order." src="assets/timeline.svg" width="100%">
 </picture>
 
 <picture>
@@ -877,7 +958,7 @@ The newest division exists because the other three kept running into the same wa
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg">
-  <img alt="Instrument inventory. Technologies grouped by role: languages, models, retrieval, services, interface, perception, assurance, and data and runtime. Language entries show how many of the seventeen repositories use that language as their primary language." src="assets/stack.svg" width="100%">
+  <img alt="Instrument inventory. Technologies grouped by role: languages, models, retrieval, services, interface, perception, assurance, and data and runtime. Language entries show how many of the nineteen repositories use that language as their primary language." src="assets/stack.svg" width="100%">
 </picture>
 
 <picture>
@@ -934,12 +1015,12 @@ python3 scripts/build_assets.py   # regenerates every asset on this page
 
 | | |
 |---|---|
-| **Assets** | 48 SVG files, light and dark pairs, roughly 3&ndash;20&nbsp;KB each |
+| **Assets** | 56 SVG files, light and dark pairs, roughly 3&ndash;20&nbsp;KB each |
 | **Dependencies** | none &mdash; the standard library draws the SVG by hand |
 | **Dark mode** | `<picture>` with `prefers-color-scheme`, honoured natively by GitHub |
 | **Accessibility** | every SVG carries `<title>` and `<desc>`; every `<img>` carries alt text; all body copy is real Markdown |
 | **JavaScript** | none |
 
-A word on honesty. This page shows no star counts, no follower counts and no streak graphics, because those numbers are currently zero and dressing them up would undermine everything else here. The counts that do appear &mdash; seventeen repositories, five divisions, six months, one live deployment &mdash; are all verifiable from the repository list; the portfolio site is counted separately because it is not one of the repositories. One repository, [`foundry`](https://github.com/Tayab-Ahamed/foundry), is a fork of the Ethereum toolchain and is deliberately excluded from the seventeen.
+A word on honesty. This page shows no star counts, no follower counts and no streak graphics, because those numbers are currently zero and dressing them up would undermine everything else here. The counts that do appear &mdash; nineteen repositories, five divisions, eight months, one live deployment &mdash; are all verifiable from the repository list; the portfolio site is counted separately because it is not one of the repositories. One repository, [`foundry`](https://github.com/Tayab-Ahamed/foundry), is a fork of the Ethereum toolchain and is deliberately excluded from the nineteen.
 
 </details>
